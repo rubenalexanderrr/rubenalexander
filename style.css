@@ -1,0 +1,55 @@
+.navbar {
+    box-shadow: 0px 0px 3px white;
+}
+
+.navbar-nav .nav-item .nav-link {
+    color: rgb(162, 162, 162);
+}
+
+.navbar-nav .nav-item {
+    cursor: pointer;
+    transition: .4s;
+}
+
+.navbar-nav .nav-item:hover {
+    background-color: rgb(0, 0, 0);
+}
+
+.navbar-nav .nav-item.active .nav-link,
+.navbar-nav .nav-item:hover .nav-link {
+    color: rgb(232, 231, 231);
+}
+
+.navbar-nav .nav-item.active .nav-link,
+.navbar-nav .nav-item:active .nav-link {
+    color: rgb(49, 48, 48);
+}
+
+.finger {
+    position: relative;
+    top: -50px;
+}
+
+
+.svg {
+    margin-top: -2px;
+}
+
+#home {
+    padding-top: 100px;
+}
+
+#about,
+#projects,
+#contact {
+    margin-top: -72px;
+}
+
+
+body {
+    overflow-x: hidden;
+}
+
+section {
+    padding-top: 70px;
+}
