@@ -12,7 +12,7 @@
     <!-- My CSS  -->
     <link rel="stylesheet" href="style.css">
 
-    <title>Portofolio</title>
+    <title>My Portofolio</title>
 </head>
 
 <body>
@@ -175,21 +175,29 @@
             </div>
             <div class="row justify-content-between">
                 <div class="col-lg-5 ms-lg-5">
-                    <form>
-                        <div class="mb-3">
+                    <div class="alert alert-success alert-dismissible fade show d-none mt-3" role="alert">
+                        <strong>Terima kasih!</strong> Pesan anda sudah dikirimkan.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    <form name="portofolio-contact-form">
+                        <div class="mb-3 mt-3">
                             <label for="exampleInputName1" class="form-label">Nama</label>
-                            <input type="text" class="form-control" id="exampleInputName1">
+                            <input type="text" class="form-control" id="exampleInputName1" name="nama">
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Email address</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputTextArea1" class="form-label">Pesan</label>
                             <br>
-                            <textarea style="min-width:100%" name="" id="exampleInputTextArea1" cols="ms-auto" rows="6"></textarea>
+                            <textarea style="min-width:100%" name="pesan" id="exampleInputTextArea1" cols="ms-auto" rows="6"></textarea>
                         </div>
-                        <button type="submit" class="btn btn-dark">Submit</button>
+                        <button type="submit" class="btn btn-dark btn-kirim mb-2">Submit</button>
+                        <button class="btn btn-dark btn-loading d-none mb-2" type="button" disabled>
+                            <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                            Loading...
+                        </button>
                     </form>
                 </div>
                 <div class="col-4 text-center">
@@ -219,6 +227,33 @@
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbyjNGANJ3i68vYANPVPYl3_sTRAdXvjqDEir5r1bwGOYqFLq8LjE4Kdt2GJQd98tzlkeQ/exec'
+        const form = document.forms['portofolio-contact-form']
+        const btnKirim = document.querySelector('.btn-kirim');
+        const btnLoading = document.querySelector('.btn-loading');
+        const myAlert = document.querySelector('.alert');
+
+
+        form.addEventListener('submit', e => {
+            e.preventDefault()
+            // ketika tombol submit diklik
+            // tampilkan tombol loading hilangkan tombol kirim
+            btnLoading.classList.toggle('d-none');
+            btnKirim.classList.toggle('d-none');
+            fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+                .then(response => {
+                    console.log('Success!', response)
+                    // tampilkan tombol kirim dan hilangkan tombol loading
+                    btnLoading.classList.toggle('d-none');
+                    btnKirim.classList.toggle('d-none');
+                    myAlert.classList.toggle('d-none');
+                    // reset form
+                    form.reset();
+                })
+                .catch(error => console.error('Error!', error.message))
+        })
+    </script>
 
 </body>
 
