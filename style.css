@@ -35,6 +35,11 @@
     margin-top: -2px;
 }
 
+.svg-center {
+    justify-content: center;
+    display: flex;
+}
+
 #home {
     padding-top: 100px;
 }
